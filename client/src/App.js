@@ -1,10 +1,7 @@
 import React, { useState } from "react"
 // import './App.css';
-import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import NewSMS from "./Pages/New SMS/NewSMS";
-import RightNav from './Components/RightNav/RightNav';
-import Sidebar from './Components/Sidebar/Sidebar';
 import Wel from './Components/Wel'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import Campaign from "./Pages/Campaign/Campaign";
@@ -62,10 +59,15 @@ import ChangePassword from "./Pages/User Settings/ChangePassword";
 import LoginHistory from "./Pages/User Settings/LoginHistory";
 import Alerts from "./Pages/User Settings/Alerts";
 import Login from "./Pages/LoginForm/Login";
+import Appheader from "./Pages/LoginForm/Appheader";
 import Campaign1 from "./Pages/Campaign/Curd/Campaign1";
 
 import Edit from "./Pages/Campaign/Curd/Edit";
 import Create from "./Pages/Campaign/Curd/Create";
+import Roots from "./Pages/Roots/Roots";
+import { ToastContainer } from 'react-toastify';
+import Register from "./Pages/LoginForm/Register";
+
 
 
 function App() {
@@ -76,10 +78,10 @@ function App() {
   
   return (
     <div className="App">
+       <ToastContainer theme='colored' position='top-center'></ToastContainer>
     <BrowserRouter>
-    <Sidebar />
-    <Header />
-    <RightNav />
+    <Appheader></Appheader>
+    <Roots />
      <Routes>
      <Route path="/" element={<Home/>}>Home</Route>
       {/* New SMS pages*/}
@@ -158,6 +160,7 @@ function App() {
    
    {/* Login Form*/}
    <Route path="/Login" element={<Login/>}/>
+   <Route path="/register" element={<Register/>}/>
    
 <Route path="/*" element={<NotFound/>} />
     

@@ -1,9 +1,30 @@
-import React from 'react'
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import './home.css'
 // import { NavLink } from "react-router-dom";
 import CanvasJSReact from './assets/canvasjs.react';
 
 const Home = () => {
+	const usenavigate = useNavigate();
+    const [customerlist, listupdate] = useState(null);
+   
+    useEffect(() => {
+       
+
+        // let jwttoken = sessionStorage.getItem('jwttoken');
+        // fetch("https://localhost:44308/Customer", {
+        //     headers: {
+        //         'Authorization': 'bearer ' + jwttoken
+        //     }
+        // }).then((res) => {
+        //     return res.json();
+        // }).then((resp) => {
+        //     listupdate(resp);
+        // }).catch((err) => {
+        //     console.log(err.messsage)
+        // });
+
+    }, []);
 	
 	var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 	
