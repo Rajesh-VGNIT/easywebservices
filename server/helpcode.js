@@ -1,6 +1,7 @@
-const express = require('express');
-const cors = require('cors')
-const app = express();
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 // Connection local mongodb
 
@@ -11,7 +12,7 @@ const app = express();
 //   console.log("db connected");
 // }
 
-// Connection mongoDB atlas 
+// Connection mongoDB atlas
 
 const { MongoClient } = require("mongodb");
 
@@ -22,7 +23,7 @@ async function run() {
   // a valid username and password! Note that in a production environment,
   // you do not want to store your password in plain-text here.
   const uri =
-    "mongodb+srv://other-user:otheruser35@cluster0.0fgqy.mongodb.net/?retryWrites=true&w=majority";
+    "mongodb+srv://other-user:otheruser35@cluster0.0fgqy.mongodb.net/?retryWrites=true&w=majority/easywebservices";
 
   // The MongoClient is the object that references the connection to our
   // datastore (Atlas, for example)
@@ -39,6 +40,8 @@ async function run() {
   const dbName = "easywebservices";
   const collectionName = "users";
 
+  console.log('mongodb connected...');
+
   // Create references to the database and collection in order to run
   // operations on them.
   const database = client.db(dbName);
@@ -52,8 +55,7 @@ async function run() {
    * insert them all in one call with collection.insertMany().
    */
 
-  
-// ** run only one time  
+  // ** run only one time
   // const users = [
   //   {
   //     username: "vipul",
@@ -89,13 +91,15 @@ async function run() {
 
   try {
     const cursor = await collection.find(findQuery).sort({ name: 1 });
-    await cursor.forEach(user => {
+    await cursor.forEach((user) => {
       console.log(`${user.name}`);
     });
     // add a linebreak
     console.log();
   } catch (err) {
-    console.error(`Something went wrong trying to find the documents: ${err}\n`);
+    console.error(
+      `Something went wrong trying to find the documents: ${err}\n`
+    );
   }
 
   // We can also find a single document. Let's find the first document
@@ -132,11 +136,15 @@ async function run() {
     const updateResult = await collection.findOneAndUpdate(
       findOneQuery,
       updateDoc,
-      updateOptions,
+      updateOptions
     );
-    console.log(`Here is the updated document:\n${JSON.stringify(updateResult.value)}\n`);
+    console.log(
+      `Here is the updated document:\n${JSON.stringify(updateResult.value)}\n`
+    );
   } catch (err) {
-    console.error(`Something went wrong trying to update one document: ${err}\n`);
+    console.error(
+      `Something went wrong trying to update one document: ${err}\n`
+    );
   }
 
   /*      *** DELETE DOCUMENTS ***
@@ -147,7 +155,6 @@ async function run() {
    *      the DeleteMany() method. In this example, we'll delete two of
    *      the recipes.
    */
-
 
   const deleteQuery = { name: { $in: ["elotes", "fried rice"] } };
   try {
@@ -191,29 +198,26 @@ server.post("/user", async (req, res) => {
   res.json(doc);
 });
 
-server.get("/User", async (req, res) => {
+server.get("/user", async (req, res) => {
   const docs = await User.find({});
   res.json(docs);
 });
 
-server.put("/user/:id", async (req, res) =>{
- const doc= await User
-    .findOneAndReplace(
-      { _id: req.params.id },
-      { $set: { username: req.body.username } },
-      {
-        new: true,
-      }
-    )
-    .then((doc) => {
-      res.json(doc);
-    });
+server.put("/user/:id", async (req, res) => {
+  const doc = await User.findOneAndReplace(
+    { _id: req.params.id },
+    { $set: { username: req.body.username } },
+    {
+      new: true,
+    }
+  ).then((doc) => {
+    res.json(doc);
+  });
 });
 
-server.delete("/user/:id", async (req, res) =>{
- const doc = await User.findByIdAndDelete({ _id: req.params.id })
-    res.json(doc);
-
+server.delete("/user/:id", async (req, res) => {
+  const doc = await User.findByIdAndDelete({ _id: req.params.id });
+  res.json(doc);
 });
 
 // server.delete("/logindata/:id", async (req, res) =>{
