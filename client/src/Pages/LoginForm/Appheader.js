@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 const Appheader = () => {
     const [displayusername, displayusernameupdate] = useState('');
@@ -25,10 +26,7 @@ const Appheader = () => {
             {showmenu &&
                 <div className="header">
 
-                    <Link to={'/'}>Home</Link>
-                    <Link to={'/customer'}>Customer</Link>
-                    <span style={{ marginLeft: '70%' }}>Welcome <b>{displayusername}</b></span>
-                    <Link style={{ float: 'right' }} to={'/login'}>Logout</Link>
+                  welcome
                 </div>
             }
         </div>

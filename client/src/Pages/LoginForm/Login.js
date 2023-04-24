@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import './login.css';
 
 const Login = () => {
     const [username, usernameupdate] = useState('');
@@ -28,13 +29,13 @@ sessionStorage.clear();
                         toast.success('Success');
                         sessionStorage.setItem('username',username);
                         sessionStorage.setItem('userrole',resp.role);
-                        usenavigate('/roots')
+                        usenavigate('/')
                     }else{
                         toast.error('Please Enter valid credentials');
                     }
                 }
             }).catch((err) => {
-                toast.error('Login Failed due to :' + err.message);
+                toast.error('Login Failed due to :');
             });
         }
     }

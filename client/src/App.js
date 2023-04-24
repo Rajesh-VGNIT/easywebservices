@@ -59,13 +59,12 @@ import ChangePassword from "./Pages/User Settings/ChangePassword";
 import LoginHistory from "./Pages/User Settings/LoginHistory";
 import Alerts from "./Pages/User Settings/Alerts";
 import Login from "./Pages/LoginForm/Login";
-import Appheader from "./Pages/LoginForm/Appheader";
+
 import Campaign1 from "./Pages/Campaign/Curd/Campaign1";
 
 import Edit from "./Pages/Campaign/Curd/Edit";
 import Create from "./Pages/Campaign/Curd/Create";
 import Roots from "./Pages/Roots/Roots";
-import { ToastContainer } from 'react-toastify';
 import Register from "./Pages/LoginForm/Register";
 
 
@@ -78,9 +77,9 @@ function App() {
   
   return (
     <div className="App">
-       <ToastContainer theme='colored' position='top-center'></ToastContainer>
+      
     <BrowserRouter>
-    <Appheader></Appheader>
+   
     <Roots />
      <Routes>
      <Route path="/" element={<Home/>}>Home</Route>
